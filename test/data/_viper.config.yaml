@@ -1,0 +1,10 @@
+# dummy configuration file used in unit test to check every viper types
+test-string: str
+test-int: 1
+test-stringslice: str1 str2
+test-bool: true
+test-dbtype-postgres: postgres
+test-dbtype-sqlite3: sqlite3
+test-dbsecurecnxtype-enabled: enabled
+test-dbsecurecnxtype-selfsigned: selfsigned
+test-dbsecurecnxtype-insecure: insecure
