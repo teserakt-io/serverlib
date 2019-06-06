@@ -9,6 +9,7 @@ import (
 func TestAppResolver(t *testing.T) {
 	_, currentFilePath, _, _ := runtime.Caller(1)
 	currentDirectory := filepath.Dir(currentFilePath)
+	parentDirectory := filepath.Join(currentDirectory, "..")
 
 	resolver, err := NewAppPathResolver(currentFilePath)
 	if err != nil {
@@ -17,7 +18,7 @@ func TestAppResolver(t *testing.T) {
 
 	t.Run("ConfigFile returns expected path", func(t *testing.T) {
 		path := resolver.ConfigFile("config.yml")
-		expectedPath := filepath.Join(currentDirectory, ConfigDir, "config.yml")
+		expectedPath := filepath.Join(parentDirectory, ConfigDir, "config.yml")
 
 		if path != expectedPath {
 			t.Errorf("Expected path to be %s, got %s", expectedPath, path)
@@ -26,7 +27,7 @@ func TestAppResolver(t *testing.T) {
 
 	t.Run("ConfigDir returns expected path", func(t *testing.T) {
 		path := resolver.ConfigDir()
-		expectedPath := filepath.Join(currentDirectory, ConfigDir)
+		expectedPath := filepath.Join(parentDirectory, ConfigDir)
 
 		if path != expectedPath {
 			t.Errorf("Expected path to be %s, got %s", expectedPath, path)
@@ -46,7 +47,7 @@ func TestAppResolver(t *testing.T) {
 			path         string
 			expectedPath string
 		}{
-			{path: "./../test", expectedPath: filepath.Join(currentDirectory, ConfigDir, "./../test")},
+			{path: "./../test", expectedPath: filepath.Join(parentDirectory, ConfigDir, "./../test")},
 			{path: "/test/something", expectedPath: "/test/something"},
 		}
 

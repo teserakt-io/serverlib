@@ -75,7 +75,7 @@ func (a *AppPathResolver) ConfigFile(confFilename string) string {
 
 // ConfigDir returns the path to the config file directory, given confFilename as a config file argument
 func (a *AppPathResolver) ConfigDir() string {
-	return filepath.Join(a.absolutePrefixPath, ConfigDir)
+	return filepath.Join(a.absolutePrefixPath, "..", ConfigDir)
 }
 
 // BinaryFile returns the path to the binary itself, in case this is ever useful
