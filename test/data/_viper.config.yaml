@@ -8,3 +8,4 @@ test-dbtype-sqlite3: sqlite3
 test-dbsecurecnxtype-enabled: enabled
 test-dbsecurecnxtype-selfsigned: selfsigned
 test-dbsecurecnxtype-insecure: insecure
+test-path: ../test/path

@@ -45,6 +45,7 @@ var ConfigDir = "configs"
 // ConfigDirResolver defines method for resolving application configuration path
 type ConfigDirResolver interface {
 	ConfigDir() string
+	ConfigRelativePath(relPath string) string
 }
 
 // AppPathResolver represents the state of an application path lookup for future use
@@ -89,5 +90,5 @@ func (a *AppPathResolver) ConfigRelativePath(relPath string) string {
 	if filepath.IsAbs(relPath) {
 		return relPath
 	}
-	return filepath.Join(filepath.Join(a.absolutePrefixPath, ConfigDir), relPath)
+	return filepath.Join(a.ConfigDir(), relPath)
 }

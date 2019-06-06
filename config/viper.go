@@ -73,6 +73,9 @@ const (
 	ViperDBType
 	// ViperDBSecureConnection defines a viper type for a DBSecureConnectionType
 	ViperDBSecureConnection
+	// ViperRelativePath defines a relative string path representation, from the config file location.
+	// Those field types will get normalized by the loader to their absolute location.
+	ViperRelativePath
 )
 
 // ViperCfgField defines a struct to instruct viper what and how to load configuration data.
@@ -126,6 +129,10 @@ func (loader *viperConfigLoader) Load(fields []ViperCfgField) error {
 		case ViperDBSecureConnection:
 			v := field.Target.(*DBSecureConnectionType)
 			*v = DBSecureConnectionType(loader.v.GetString(field.KeyName))
+		case ViperRelativePath:
+			v := field.Target.(*string)
+			path := loader.v.GetString(field.KeyName)
+			*v = loader.configResolver.ConfigRelativePath(path)
 		default:
 			return fmt.Errorf("unsupported configuration type %v for field %v", field.CfgType, field.KeyName)
 		}

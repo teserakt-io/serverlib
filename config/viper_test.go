@@ -19,6 +19,10 @@ func (t *testResolver) ConfigDir() string {
 	return t.configDir
 }
 
+func (t *testResolver) ConfigRelativePath(relPath string) string {
+	return filepath.Join(t.configDir, relPath)
+}
+
 // getRootDir retrieve project root directory path from current test file
 func getRootDir() string {
 	_, filename, _, _ := runtime.Caller(0)
@@ -43,6 +47,7 @@ func TestViper(t *testing.T) {
 		TestDBSecureCnxTypeEnabled    DBSecureConnectionType
 		TestDBSecureCnxTypeSelfSigned DBSecureConnectionType
 		TestDBSecureCnxTypeInsecure   DBSecureConnectionType
+		TestViperPath                 string
 	}
 
 	var cfg testConfig
@@ -75,6 +80,7 @@ func TestViper(t *testing.T) {
 			DBSecureConnectionEmpty,
 			"",
 		},
+		ViperCfgField{&cfg.TestViperPath, "test-path", ViperRelativePath, "", ""},
 	}
 
 	if err := loader.Load(fields); err != nil {
@@ -91,6 +97,7 @@ func TestViper(t *testing.T) {
 		TestDBSecureCnxTypeEnabled:    DBSecureConnectionEnabled,
 		TestDBSecureCnxTypeInsecure:   DBSecureConnectionInsecure,
 		TestDBSecureCnxTypeSelfSigned: DBSecureConnectionSelfSigned,
+		TestViperPath:                 resolver.ConfigRelativePath("../test/path"),
 	}
 
 	if reflect.DeepEqual(cfg, expectedCfg) == false {
