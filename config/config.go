@@ -50,6 +50,16 @@ func (m DBSecureConnectionType) PostgresSSLMode() string {
 	}
 }
 
+// IsInsecure return true whenever the secure connection type is insecure
+func (m DBSecureConnectionType) IsInsecure() bool {
+	return m == DBSecureConnectionInsecure
+}
+
+// IsSelfSigned return true whenever the secure connection type is self signed
+func (m DBSecureConnectionType) IsSelfSigned() bool {
+	return m == DBSecureConnectionSelfSigned
+}
+
 func (m DBSecureConnectionType) String() string {
 	return string(m)
 }
