@@ -3,6 +3,10 @@ package config
 // DBType defines the different supported database types
 type DBType string
 
+func (d DBType) String() string {
+	return string(d)
+}
+
 const (
 	// DBTypeEmpty defines an empty database type
 	DBTypeEmpty DBType = ""
