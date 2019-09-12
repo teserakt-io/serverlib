@@ -48,7 +48,7 @@ func (l *elasticLogger) Log(keyvals ...interface{}) error {
 
 		index := fmt.Sprintf("%s-%s", l.indexBaseName, time.Now().Format("2006.01.02"))
 		_, err := l.esClient.Index().Index(index).Type("log").
-			BodyString(string(buf.Bytes())).
+			BodyString(buf.String()).
 			Refresh("true").
 			Do(context.Background())
 
