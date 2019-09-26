@@ -6,7 +6,7 @@ import (
 	"runtime"
 	"testing"
 
-	"gitlab.com/teserakt/serverlib/path"
+	"github.com/teserakt-io/serverlib/path"
 )
 
 type testResolver struct {

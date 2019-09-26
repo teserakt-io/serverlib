@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/viper"
 
-	"gitlab.com/teserakt/serverlib/path"
+	"github.com/teserakt-io/serverlib/path"
 )
 
 // Loader defines a service able to load configuration
@@ -27,7 +27,7 @@ type viperConfigLoader struct {
 //
 //    import (
 //        "fmt"
-//        "gitlab.com/teserakt/serverlib/path"
+//        "github.com/teserakt-io/serverlib/path"
 //     )
 //
 //     loader := NewViperLoader("config", path.NewAppPathResolver())
