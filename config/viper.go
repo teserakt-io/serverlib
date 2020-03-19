@@ -1,3 +1,17 @@
+// Copyright 2020 Teserakt AG
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package config
 
 import (
@@ -22,30 +36,6 @@ type viperConfigLoader struct {
 // NewViperLoader creates a new configuration loader using Viper
 // It will attempt to load file identified by configName (without extension)
 // in pathResolver.ConfigDir()
-//
-// Example:
-//
-//    import (
-//        "fmt"
-//        "github.com/teserakt-io/serverlib/path"
-//     )
-//
-//     loader := NewViperLoader("config", path.NewAppPathResolver())
-//
-//     var url string
-//     var count int
-//
-//     fields := []ViperCfgField{
-// 	        ViperCfgField{&url, "url", ViperString, "http://localhost:8080", "URL"},
-// 	        ViperCfgField{&count, "count", ViperInt, 0, ""},
-//     }
-//
-//     if err := loader.Load(fields); err != nil {
-//	        fmt.Fatalf("Failed to load configuration: %v", err)
-//     }
-//
-//     fmt.Printf("Url: %s, count: %d\n", url, count)
-//
 func NewViperLoader(configName string, configResolver path.ConfigDirResolver) Loader {
 	v := viper.New()
 	v.SetConfigName(configName)
